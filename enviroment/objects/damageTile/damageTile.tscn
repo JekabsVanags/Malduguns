@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://enviroment/test/test-tilemaps.jpg" type="Texture" id=1]
+[ext_resource path="res://enviroment/objects/damageTile/damageTile.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 1 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 135, 331, 64, 64 )
+
+[node name="damageArea" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 9.53674e-07, -33 )
+shape = SubResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = SubResource( 5 )
+
+[connection signal="body_entered" from="." to="." method="_on_damageArea_body_entered"]
